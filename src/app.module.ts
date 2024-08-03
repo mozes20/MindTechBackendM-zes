@@ -6,6 +6,8 @@ import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { UserEntity } from './model/user.entity';
+import { PokemonModule } from './pokemon/pokemon.module';
+import { AxiosService } from './axios/axios.service';
 
 @Module({
   imports: [
@@ -23,8 +25,9 @@ import { UserEntity } from './model/user.entity';
     }),
     AuthModule,
     UsersModule,
+    PokemonModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AxiosService],
 })
 export class AppModule {}
