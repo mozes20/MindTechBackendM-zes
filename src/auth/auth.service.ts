@@ -22,9 +22,11 @@ export class AuthService {
       loginData.username,
       loginData.password,
     );
+    const user = await this.userEntityRepository.findOneBy({ username: loginData.username });
+
     console.log(loginStatus);
     if (loginStatus) {
-      const payload = { username: loginData.username };
+      const payload = { id: user.id,username: loginData.username };
       return new ResponseDto('Login Success', this.jwtService.sign(payload));
     }
     throw new HttpException('Login Failed', HttpStatus.NOT_FOUND);
@@ -52,5 +54,9 @@ export class AuthService {
       return false;
     }
     return await bcrypt.compare(password, user[0].password);
+  }
+
+  async getDataFromToken(token: string) {
+    return this.jwtService.decode(token);
   }
 }

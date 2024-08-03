@@ -8,6 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 import { UserEntity } from './model/user.entity';
 import { PokemonModule } from './pokemon/pokemon.module';
 import { AxiosService } from './axios/axios.service';
+import { CatchedEntity } from "./model/catched.entity";
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { AxiosService } from './axios/axios.service';
       username: 'root',
       password: 'mysecretpassword',
       database: 'my_database',
-      entities: [UserEntity],
+      entities: [UserEntity, CatchedEntity],
       synchronize: true,
       migrationsTableName: 'migration',
     }),
